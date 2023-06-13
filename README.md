@@ -3,8 +3,7 @@ This app measures the muon lifetime by using real data taken with a liquid-scint
 
 The data used were taken with the app described in
 
-https://github/lvillasen/RedPitaya-Muon-Decay-App
-
+https://github.com/lvillasen/RedPitaya-Muon-Decay-App
 
 
 ## Usage
