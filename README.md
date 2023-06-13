@@ -12,7 +12,7 @@ Clone the repository
     
 Open the file index.html with any browser 
     
-## Demos Web Page
+## Demo Web Page
 
 https://ciiec.buap.mx/Muon-Decay-Real-Data
 
