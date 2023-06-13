@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- Write your comments here -->
+<script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/
+MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.2/math.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.1.0/math.js"></script>
+<title>Muon-Decay</title>
+    <link href="https://ciiec.buap.mx/Pagina-CIIEC/ciiec-logo.png" rel="icon" type="image/x-icon" />
+
+    <link rel="stylesheet" href="./muon_decay.css">
+</head>
+
+
+
+
+<body>
+
+<div class="block_container"  style="background-color: #00b5e2; margin-left:10%; margin-right:10%;">    <p> </p>
+    <p> </p>
+    <br>
+
+        <h1> Muon Decay Experiment</h1>
+
+
+        <h2> CIIEC-BUAP</h2>
+
+      <p style="font-size: 30px; margin-left: 80%;">June 10th, 2023 </p>
+        <p style="font-size: 20px; margin-left: 80%;"><a href="https://github.com/lvillasen/Muon-Decay-Experiment-App/" >Source Code</a> </p>
+
+        <hr>
+        <h2> Introduction</h2>
+
+<p style="color:black;font-size:30px;">
+This app measures the muon lifetime by using real data.
+The <a href="https://www.wondriumdaily.com/cosmic-rays-and-the-discovery-of-the-unseen-particles/">muon</a> is a subatomic particle discovered in cosmic rays in 1937 by Carl Anderson and Seth Neddermeyer. It decays by means of the weak force with the decay modes
+
+$$
+\boldsymbol{\mu ^- \rightarrow e^- + \overline{v}_e + v_{\mu}}
+$$
+
+$$
+\boldsymbol{\mu ^+ \rightarrow e^+ + {v}_e + \overline{v}_{\mu}}
+$$
+
+with a lifetime in vacuum of 2.19 $\mu s $, however, when negative muons decay in a medium, besides decaying they can be captured by protons of the nuclei of the medium
+
+$$
+\boldsymbol{\mu ^- + p \rightarrow n + v_{\mu}},
+$$
+
+
+resulting in an average measurement of the lifetime of positive and negative muons lower than 2.19 $\mu s $.
+        <hr>
+
+<h2> Experimental Setup</h2>
+
+<p style="color:black;font-size:30px;">
+A typical table-top experiment to study muon decays measures the time between a first pulse, produced by a low-energy muon from the secondary cosmic rays that reaches and stops inside a detector, and a second pulse due to an electron or positron resulting from the muon decay.
+<br><br>
+
+These pulses are produced by the interaction of the incoming muons and decay electrons in a solid or liquid scintillator material or by Cherenkov effect in a water container. Occasionally, the second pulse can be produced by a second muon reaching the detector in a short time window after the first muon.
+
+<br><br>
+The tiny light produced by the interaction of the subatomic particles with the detector media is amplified by a photomultiplier tube coupled to the detector material. More details can be found <a href="https://pubs.aip.org/aip/acp/article/422/1/333/633457/Muon-lifetime-measurement">here</a>.
+<br><br>
+In our experiment we used an 18-liter container filled with liquid scintillator shown in the next picture.
+</p>
+<center><img src="./muon_decay_real_data.png" alt="Trulli" width="90%"></center>
+
+<p style="color:black;font-size:30px;">
+and the <a href="https://redpitaya.com/stemlab-125-14/">STEMlab 125-14 RedPitaya</a> board,
+            shown in the picture below, to collect our data as described <a href="https://ciiec.buap.mx/RedPitaya-Muon-Decay-App">here</a>.
+</p>
+    <center><img src="./redpitaya.png" alt="Trulli" width="50%"></center>
+    <br><br>
+    <p style="color:black;font-size:30px;">
+
+
+        <hr>
+
+
+<h2> Data Analysis</h2>
+
+<p style="color:black;font-size:30px;">
+
+    We estimate the background noise by counting the number of events between 10 $\mu s$ and 20 $\mu s$ and multiplying this number by 2, under the assumtion that the background noise due to double coincidences has a flat distribution.
+
+    Then we subtract the estimated background noise from the data and take the natural logarithm to convert the exponential distribution to a <a href="https://www.spiceworks.com/tech/artificial-intelligence/articles/what-is-linear-regression/">linear regression</a>  problem.
+  
+ <br>
+ <br>
+   We use a weighted least squares method to estimate the values of the slope $m$, the y-intercept $b$ and the standard error on the slope.
+
+
+
+<hr>
+<h2> Measurement of the Muon Lifetime with Real Data</h2>
+
+    <label style="font-size: 20pt;margin-left: 20px;">Select a Real-Data File:</label>
+    <!-- Write your comments here
+    <label for="file">file:</label>
+    -->
+    <select id="file">
+       <!-- <option value="">Select a file</option>
+        -->
+        <option value="MD20230602_1816.csv">MD20230602_1816.csv</option>
+        <option value="MD20230609_0014.csv">MD20230609_0014.csv</option>
+        <!-- comment-->
+    </select>
+    <br>
+
+    <br>
+    <div id="resultado"></div>
+
+
+    <br>
+
+
+
+
+ <div  class="block_container" style="background-color: #00b5e2; width:100%;">
+        <div id="plot1" style= " border:solid 5px #003b5c; width:100%;"></div>
+    </div>
+
+
+<div id="block_container" style="text-align:center;">
+
+
+ <input class="favorite styled" type="button" id="start_stop_real" value="Start" onclick="start_real();">
+        <input class="favorite styled" type="button" id="sreset" value="Reset" onclick="reset_real();">
+<label style="font-size: 15pt;margin-left: 20px;"> Display Rate </label>
+<select id="rate" onchange="step_real()">
+        <option value="1" selected>1</option>
+        <option value="10">10</option>
+
+    </select>
+    <label style="font-size: 15pt;margin-left: 20px;"> First Bin in Fit </label>
+<select id="bin" onchange="draw_real()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3" >3</option>
+        <option value="4" selected>4</option>
+        <option value="5">5</option>
+    </select>
+              <label style="font-size: 15pt;margin-left: 20px;"> Background Subtracted </label>
+
+       <input id="back_subtracted" type="checkbox" onchange="draw_real()">
+
+       <label style="font-size: 15pt;margin-left: 20px;"> Log Scale </label>
+                  <input id="logscale" type="checkbox" onchange="draw_real()">
+
+    </div>
+
+    <div  id="my_element"  class="block_container" style="background-color: #00b5e2; width:100%;">
+        <div id="plot2" style= " border:solid 5px #003b5c; width:100%;"></div>
+    </div>
+
+            <br>
+</body>
+
+
+<script type="text/javascript" src="./muon_decay4.js"></script>
+
+</html>
