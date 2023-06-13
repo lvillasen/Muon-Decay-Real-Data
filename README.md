@@ -8,10 +8,11 @@ https://github.com/lvillasen/RedPitaya-Muon-Decay-App
 
 ## Usage
 
-Clone the repository
+Clone the repository to a web server
     
 Open the file index.html with any browser 
-    
+
+
 ## Demo Web Page
 
 https://ciiec.buap.mx/Muon-Decay-Real-Data
