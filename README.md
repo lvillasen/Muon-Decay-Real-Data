@@ -1,5 +1,5 @@
 # Muon-Decay-Real-Data
-This app measures the muon lifetime by using real data taken with a liquid-scintillator detector and a RedPitaya STEMLab 125-14 board.
+This app measures the muon lifetime by using real data taken with a liquid-scintillation detector and a RedPitaya STEMLab 125-14 board.
 
 The data used were taken with the app described in
 
